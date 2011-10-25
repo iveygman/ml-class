@@ -24,15 +24,12 @@ for i=1:m
   J = J + -y(i)*log(h) - (1-y(i))*log(1-h);
   for g = 1:length(theta)
     grad(g) = grad(g) + (h-y(i))*X(i,g);
-    if (g~=1)
-      grad(g) = grad(g) + lambda * theta(g);
-    end
   end
 end
 
 J = J/m + sum(theta(2:end).^2)*lambda/(2*m);
 grad = grad/m;
-
+grad(2:end) = grad(2:end) + theta(2:end)*lambda/m;
 
 % =============================================================
 

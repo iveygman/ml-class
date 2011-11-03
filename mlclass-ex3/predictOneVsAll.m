@@ -30,7 +30,11 @@ X = [ones(m, 1) X];
 %       for each row.
 %       
 
-
+% each example...
+for k = 1:size(X,1)
+	probs = sigmoid(all_theta * X(k,:)');
+	[dummy p(k)] = max(probs);
+end
 
 
 

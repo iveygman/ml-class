@@ -36,14 +36,11 @@ grad = zeros(size(theta));
 %           grad = grad + YOUR_CODE_HERE (using the temp variable)
 %
 temp = repmat(theta',size(X,1),1);
-xth = sum(temp.*X,2);
+xth = X*theta;
 vec = -y.*log(sigmoid(xth)) - (1-y).*log(1-sigmoid(xth));
-J = sum(vec)/m;
+J = sum(vec)/m + sum(theta(2:end).^2)*lambda/(2*m);
 grad = 1/m * X' * (sigmoid(xth)-y);
-temp = theta; 
-temp(1) = 0;
-grad = grad + lambda/m * temp;
-
+grad(2:end) = grad(2:end) + theta(2:end) * lambda/m;
 
 
 

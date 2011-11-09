@@ -62,12 +62,40 @@ Theta2_grad = zeros(size(Theta2));
 %               and Theta2_grad from Part 2.
 %
 
-for K = 1:num_labels
+% each node in hidden layer...
+a1 = [ones(m,1) X];
+z2 = zeros(size(Theta1,1),m);
+a2 = z2;
+for k = 1:size(Theta1,1)
+	z2(k,:) = (Theta1(k,:)*a1')';
+end
+a2 = sigmoid(z2');
+a2 = [ones(size(a2,1),1) a2];
 
+% each node in output layer...
+z3 = zeros(num_labels,m);
+for k = 1:num_labels
+	z3(k,:) = Theta2(k,:)*a2';
+end
+a3 = sigmoid(z3)';
+
+% reshape the vector
+yy = zeros(length(y),num_labels);
+for k = 1:length(y)
+  yy(k,y(k))=1;
 end
 
+for i = 1:m
+  for K = 1:num_labels
+    n1 = -yy(i,K)*log(a3(i,K));
+    n2 = -(1-yy(i,K))*log(1-a3(i,K));
+    J = J + (n1 + n2);
+  end
+end
+J = J/m;
 
-
+J = J + lambda/(2*m)*( sum(sum(Theta1(:,2:end).^2,1),2)
+                      +sum(sum(Theta2(:,2:end).^2,1),2));
 
 
 

@@ -98,16 +98,30 @@ J = J + lambda/(2*m)*( sum(sum(Theta1(:,2:end).^2,1),2)
                       +sum(sum(Theta2(:,2:end).^2,1),2));
 
 
-
-
-
-
 % -------------------------------------------------------------
 
 % =========================================================================
 
 % Unroll gradients
-grad = [Theta1_grad(:) ; Theta2_grad(:)];
+Delta1 = Theta1 * 0;
+Delta2 = Theta2 * 0;
+for t = 1:m
+  a1 = [1;X(t,:)'];
+  z2 = Theta1 * a1;
+  a2 = [1;sigmoid(z2)];
+  z3 = Theta2 * a2;
+  a3 = sigmoid(z3);
+  delta3 = a3 - yy(t,:)';
+  delta2 = (Theta2)'*delta3.* sigmoidGradient([1;z2]);
+  Delta2 = Delta2 + delta3 * a2';
+  Delta1 = Delta1 + delta2(2:end)*a1';
+end
 
+regularizer2 = Theta2; regularizer1 = Theta1;
+regularizer2(:,1) = 0; regularizer1(:,1) = 0;
+
+Theta2_grad = 1/m * Delta2 + lambda/m*regularizer2;
+Theta1_grad = 1/m * Delta1 + lambda/m*regularizer1;
+grad = [Theta1_grad(:) ; Theta2_grad(:)];
 
 end

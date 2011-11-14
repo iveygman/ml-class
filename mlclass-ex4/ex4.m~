@@ -39,10 +39,9 @@ m = size(X, 1);
 sel = randperm(size(X, 1));
 sel = sel(1:100);
 
-displayData(X(sel, :));
+%displayData(X(sel, :));
 
 fprintf('Program paused. Press enter to continue.\n');
-pause;
 
 
 %% ================ Part 2: Loading Pameters ================
@@ -55,7 +54,6 @@ fprintf('\nLoading Saved Neural Network Parameters ...\n')
 load('ex4weights.mat');
 
 % Unroll parameters 
-size(Theta2)
 nn_params = [Theta1(:) ; Theta2(:)];
 
 %% ================ Part 3: Compute Cost (Feedforward) ================
@@ -82,8 +80,7 @@ fprintf(['Cost at parameters (loaded from ex4weights): %f '...
          '\n(this value should be about 0.287629)\n'], J);
 
 fprintf('\nProgram paused. Press enter to continue.\n');
-pause;
-
+pause
 %% =============== Part 4: Implement Regularization ===============
 %  Once your cost function implementation is correct, you should now
 %  continue to implement the regularization with the cost.
@@ -101,7 +98,6 @@ fprintf(['Cost at parameters (loaded from ex4weights): %f '...
          '\n(this value should be about 0.383770)\n'], J);
 
 fprintf('Program paused. Press enter to continue.\n');
-pause;
 
 
 %% ================ Part 5: Sigmoid Gradient  ================
@@ -118,7 +114,6 @@ fprintf('%f ', g);
 fprintf('\n\n');
 
 fprintf('Program paused. Press enter to continue.\n');
-pause;
 
 
 %% ================ Part 6: Initializing Pameters ================
@@ -148,7 +143,6 @@ fprintf('\nChecking Backpropagation... \n');
 checkNNGradients;
 
 fprintf('\nProgram paused. Press enter to continue.\n');
-pause;
 
 
 %% =============== Part 8: Implement Regularization ===============
@@ -170,7 +164,6 @@ fprintf(['\n\nCost at (fixed) debugging parameters (w/ lambda = 10): %f ' ...
          '\n(this value should be about 0.576051)\n\n'], debug_J);
 
 fprintf('Program paused. Press enter to continue.\n');
-pause;
 
 
 %% =================== Part 8: Training NN ===================
@@ -187,13 +180,19 @@ fprintf('\nTraining Neural Network... \n')
 options = optimset('MaxIter', 50);
 
 %  You should also try different values of lambda
-lambda = 1;
+lambda = 5;
 
 % Create "short hand" for the cost function to be minimized
 costFunction = @(p) nnCostFunction(p, ...
                                    input_layer_size, ...
                                    hidden_layer_size, ...
-                                   num_labels, X, y, lambda);
+                                   num_labels, X, y, lambda);                               
+initial_Theta1 = randInitializeWeights(input_layer_size, hidden_layer_size);
+initial_Theta2 = randInitializeWeights(hidden_layer_size, num_labels);
+
+% Unroll parameters
+initial_nn_params = [initial_Theta1(:) ; initial_Theta2(:)];
+size(initial_nn_params)
 
 % Now, costFunction is a function that takes in only one argument (the
 % neural network parameters)

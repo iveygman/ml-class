@@ -98,7 +98,7 @@ fprintf(['Cost at parameters (loaded from ex4weights): %f '...
          '\n(this value should be about 0.383770)\n'], J);
 
 fprintf('Program paused. Press enter to continue.\n');
-
+pause
 
 %% ================ Part 5: Sigmoid Gradient  ================
 %  Before you start implementing the neural network, you will first
@@ -114,7 +114,7 @@ fprintf('%f ', g);
 fprintf('\n\n');
 
 fprintf('Program paused. Press enter to continue.\n');
-
+pause
 
 %% ================ Part 6: Initializing Pameters ================
 %  In this part of the exercise, you will be starting to implment a two
@@ -143,7 +143,7 @@ fprintf('\nChecking Backpropagation... \n');
 checkNNGradients;
 
 fprintf('\nProgram paused. Press enter to continue.\n');
-
+pause
 
 %% =============== Part 8: Implement Regularization ===============
 %  Once your backpropagation implementation is correct, you should now
@@ -164,7 +164,7 @@ fprintf(['\n\nCost at (fixed) debugging parameters (w/ lambda = 10): %f ' ...
          '\n(this value should be about 0.576051)\n\n'], debug_J);
 
 fprintf('Program paused. Press enter to continue.\n');
-
+pause
 
 %% =================== Part 8: Training NN ===================
 %  You have now implemented all the code necessary to train a neural 

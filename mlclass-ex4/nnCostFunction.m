@@ -105,6 +105,16 @@ J = J + lambda/(2*m)*( sum(sum(Theta1(:,2:end).^2,1),2)
 % Unroll gradients
 Delta1 = Theta1 * 0;
 Delta2 = Theta2 * 0;
+%a1 = [ones(m,1) X];
+%z2 = Theta1 * a1';
+%a2 = sigmoid(z2);
+%a2 = [ones(m,1) a2'];
+%z3 = Theta2 * a2';
+%delta3 = z3 - yy';
+%delta2 = delta3'*Theta2(:,2:end).*sigmoidGradient(z2)';
+%Delta2 = delta3*a2;
+%Delta1 = delta2'*a1;
+
 for t = 1:m
   a1 = [1;X(t,:)'];
   z2 = Theta1 * a1;

@@ -22,8 +22,27 @@ sigma = 0.3;
 %  Note: You can compute the prediction error using 
 %        mean(double(predictions ~= yval))
 %
+C_test = [0.1 0.3];
+sigma_test = C_test;
+C = C_test(1);  sigma = sigma_test(1);
+best_error = 1e9;
 
-
+for a = 1:length(C_test)
+    for b = 1:length(sigma_test)
+        this_C = C_test(a);
+        this_sigma = sigma_test(b);
+%        fprintf("Trying %d and %d\n",this_C,this_sigma);
+        model= svmTrain(X,y,this_C,@(x1, x2) gaussianKernel(x1, x2,this_sigma));
+        pred=svmPredict(model,Xval);
+        this_error = mean(double(pred ~= yval));
+        if (abs(this_error) < abs(best_error))
+            best_error = this_error;
+            C = this_C;
+            sigma = this_sigma;
+            fprintf("Found better parameters: %d and %d\n",this_C,this_sigma);            
+        end
+    end
+end    
 
 
 

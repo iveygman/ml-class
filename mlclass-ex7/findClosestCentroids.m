@@ -21,11 +21,19 @@ idx = zeros(size(X,1), 1);
 % Note: You can use a for-loop over the examples to compute this.
 %
 
-
-
-
-
-
+for k=1:length(idx)
+    mat = centroids-repmat(X(k,:),size(centroids,1),1);
+    [dummy m] = min(sqrt(sum(mat.^2,2)));
+%    mindex = 1;
+%    diff = abs(centroids(1,:))*1e9;
+%    for m=1:size(centroids,1)
+%        if (abs(x-centroids(m,:)) < diff)
+%            diff = abs(x-centroids(m,:));
+%            mindex = m;
+%        end
+%    end
+    idx(k) = m;
+end
 
 % =============================================================
 

@@ -63,7 +63,7 @@ fprintf('   [ 5.813503 2.633656 ]\n');
 fprintf('   [ 7.119387 3.616684 ]\n\n');
 
 fprintf('Program paused. Press enter to continue.\n');
-pause;
+%pause;
 
 
 %% =================== Part 3: K-Means Clustering ======================
@@ -93,7 +93,7 @@ initial_centroids = [3 3; 6 2; 8 5];
 fprintf('\nK-Means Done.\n\n');
 
 fprintf('Program paused. Press enter to continue.\n');
-pause;
+%pause;
 
 %% ============= Part 4: K-Means Clustering on Pixels ===============
 %  In this exercise, you will use K-Means to compress an image. To do this,
@@ -106,10 +106,10 @@ pause;
 fprintf('\nRunning K-Means clustering on pixels from an image.\n\n');
 
 %  Load an image of a bird
-A = double(imread('bird_small.png'));
+%A = double(imread('bird_small.png'));
 
 % If imread does not work for you, you can try instead
-%   load ('bird_small.mat');
+load ('bird_small.mat');
 
 A = A / 255; % Divide by 255 so that all values are in the range 0 - 1
 
@@ -123,19 +123,20 @@ X = reshape(A, img_size(1) * img_size(2), 3);
 
 % Run your K-Means algorithm on this data
 % You should try different values of K and max_iters here
-K = 16; 
+K = 64; 
 max_iters = 10;
 
 % When using K-Means, it is important the initialize the centroids
 % randomly. 
 % You should complete the code in kMeansInitCentroids.m before proceeding
-initial_centroids = kMeansInitCentroids(X, K);
+initial_centroids = kMeansInitCentroids(X, K)
+%die
 
 % Run K-Means
 [centroids, idx] = runkMeans(X, initial_centroids, max_iters);
 
 fprintf('Program paused. Press enter to continue.\n');
-pause;
+%pause;
 
 
 %% ================= Part 5: Image Compression ======================
@@ -170,5 +171,5 @@ title(sprintf('Compressed, with %d colors.', K));
 
 
 fprintf('Program paused. Press enter to continue.\n');
-pause;
+%pause;
 
